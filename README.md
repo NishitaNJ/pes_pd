@@ -193,23 +193,46 @@
     - fd: abrreviated name for skywater foundry.
     - sc: standard cell.
     - hd: hign density, variant of pdk.
+    
+    ![Screenshot from 2023-09-12 20-40-17](https://github.com/NishitaNJ/pes_pd/assets/142140741/b21679a7-d799-41f5-b5e5-f191df4d23f1)
+
 ### Design Preparation Step:
 * Invoking OpenLANE
   + `cd Desktop/work/tools/`
   + `cd openlane_working_dir`
   + `cd openlane`
   + `docker`
+  
+![Screenshot from 2023-09-16 11-27-47](https://github.com/NishitaNJ/pes_pd/assets/142140741/b13e11e6-9f4a-49f0-882a-d4c1284e87d5)
+
 * picorv32a file:
+  
+![Screenshot from 2023-09-16 11-35-13](https://github.com/NishitaNJ/pes_pd/assets/142140741/84a0d995-75fe-4acb-bc28-ce7abc600ddc)
+
 * Setting up the design: `prep -design picorv32a`
   - Merging LEFs : It merges the cell level lef and technology level lef.
+  
+  ![Screenshot from 2023-09-16 11-41-07](https://github.com/NishitaNJ/pes_pd/assets/142140741/61154983-8c00-4cf0-b606-490772cd3eb3)
+
 ### Review files after design prep and run synthesis:
 * After the design prep a new "runs" folder is created.
+  
+  ![Screenshot from 2023-09-16 11-49-04](https://github.com/NishitaNJ/pes_pd/assets/142140741/0e92aed1-7c26-46c5-b3ef-32164ed1724c)
+
 * To run synthesis: type the command `run_synthesis`
+  
+  ![Screenshot from 2023-09-16 12-33-39](https://github.com/NishitaNJ/pes_pd/assets/142140741/5a5cdf55-509b-4cb6-8427-e2fbf1985887)
+
 ### Steps to characterize the synthesis results:
 * Statistics:
+  
+  ![Screenshot from 2023-09-16 13-27-11](https://github.com/NishitaNJ/pes_pd/assets/142140741/4679bf6d-eeb7-4b89-bf18-d1bbd4604fa3)
+
 * Calculating the flop ratio:
   - Flop ratio = 1613/14876 = 0.108
   - 10.8% of the cells in our design are flip flops.
 * Netlist is generated in the runs folder:
+
+![Screenshot from 2023-09-16 13-38-36](https://github.com/NishitaNJ/pes_pd/assets/142140741/152c252c-e6da-42ff-b9c8-9b389001e30b)
 
 </details>
