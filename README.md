@@ -43,7 +43,6 @@
 * Library binding and placements
   + [Netlist binding and initial place design](#netlist-binding-and-initial-place-design)
   + [Optimize placement using estimated wire-length and capacitance](#optimize-placement-using-estimated-wire-length-and-capacitance)
-  + [Final placement optimization](#final-placement-optimization)
   + [Need for libraries and characterization](#need-for-libraries-and-characterization)
   + [Congestion aware placement using RePlAce](#congestion-aware-placement-using-replace)
 * Cell design and characterization flows
@@ -312,5 +311,44 @@
 
 * Standard cells:
   ![Screenshot from 2023-09-17 19-51-21](https://github.com/NishitaNJ/pes_pd/assets/142140741/0c8ceeb4-f9ac-4d5e-9aaa-acbd1fe61e8d)
+
+## Library binding and placements:
+### Netlist binding and initial place design:
+* In reality, the designs are not represented in the form of logic gates or flipflops instead in the form of squares and rectangles.
+* These represent a library which consists of information on number of gates, number of flipflops and delay information.
+
+![netlistbind](https://github.com/NishitaNJ/pes_pd/assets/142140741/1632ba75-1c42-4739-98e3-1f3f572fede6)
+
+* Next step is to place the physical view of the netlist on the floorplan.
+* The floorplan already consists of pre-placed cells and I/O ports.
+
+### Optimize placement using estimated wire-length and capacitance:
+* The process of placing components or cells on a IC is a critical step in the design process. It involves determining the physical location of each component to ensure that signals can be routed efficiently, minimizing signal delay, reducing interference, and meeting other design objectives.
+
+![placement](https://github.com/NishitaNJ/pes_pd/assets/142140741/2e725bb4-a1b9-407d-a735-3855b960c085)
+
+* Wire length estimation in design involves approximating the total length of wires or traces connecting components.
+* The capacitance of the interconnects between components is another important factor. Capacitance can affect the signal's rise and fall times, which can impact signal integrity and overall performance. Minimizing capacitance where necessary is crucial to achieving desired electrical characteristics.
+
+![optplace1](https://github.com/NishitaNJ/pes_pd/assets/142140741/e7c6c0ed-b4ad-447d-aab8-475514068976)
+
+* The components of the netlist are placed in the core area.
+* They are placed according to the convenience of distance from the pins.
+* When sending signal from FF1 to FF2, according to the circuit requirements, there has to be a very fast propogation of signals. Hence, they are placed very close and buffers are added since there is a small delay for the signal from the pin to reach FF1.
+* The buffers maintain signal integrity.
+
+### Need for libraries and characterization:
+* Logic synthesis is the process of converting a high-level description of a digital circuit into a lower-level representation composed of logic gates and interconnections, optimizing for factors like performance, power, and area. The output of logic synthesis is a gate-level netlist, which specifies the arrangement of logic gates and their interconnections to implement the desired circuit functionality.
+* Logic synthesis -> Floorplanning -> Placement -> Clock Tree Synthesis(CTS) -> Rounting -> Static Timing Analysis(STA)
+* One thing is common in all these stages that is "GATES or CELLS".
+* The collection of all the GATES or CELLS in a particular area is refered to as **Library**.
+
+### Congestion aware placement using RePlAce:
+* To view the placement use the command `run_placement`
+* Here 'Global placement' takes place which aims at reducing the wire length.
+* OpenLANE follows half parameter wirelength.
+
+* To view the placement, in the results directory type `cd placement`.
+* Layout:
 
 </details>
