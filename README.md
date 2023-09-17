@@ -14,7 +14,7 @@
   + run: `prep -design picorv32a`, to check for the working of tools.
 ## TABLE OF CONTENTS
 ## DAY1
-**Inception of open-source EDA, OpenLANE and Sky130 PDK**
+### Inception of open-source EDA, OpenLANE and Sky130 PDK
 * How to talk to computers
   + [Introduction to QFN-48 package,chip,pads,core,die and IP's](#introduction-to-qfn-48-package-chip-pads-core-die-and-ip's)
   + [Introduction to RISC-V](#introduction-to-risc-v)
@@ -31,9 +31,21 @@
   + [Steps to characterize synthesis results](#steps-to-characterize-synthesis-results)
 
 ## DAY2
-**Good floorplan vs Bad floorplan and introduction to library cells**
+### Good floorplan vs Bad floorplan and introduction to library cells
 * Chip floorplanning considerations
+  + [Utilization factor and aspect ratio](#utilization-factor-and-aspect-ratio)
+  + [Concept of pre-placed cells](#concept-of-pre-placed-cells)
+  + [Decoupling capacitors](#de-coupling-capacitors)
+  + [Power Planning](#power-planning)
+  + [Pin placement and logical cell placement blockage](#pin-placement-and-logical-cell-placement-blockage)
+  + [Steps to run floorplan using OpenLANE](#steps-to-run-floorplan-using-openlane)
+  + [Review floorplan layout in Magic](#review-floorplan-layout-in-magic)
 * Library binding and placements
+  + [Netlist binding and initial place design](#netlist-binding-and-initial-place-design)
+  + [Optimize placement using estimated wire-length and capacitance](#optimize-placement-using-estimated-wire-length-and-capacitance)
+  + [Final placement optimization](#final-placement-optimization)
+  + [Need for libraries and characterization](#need-for-libraries-and-characterization)
+  + [Congestion aware placement using RePlAce](#congestion-aware-placement-using-replace)
 * Cell design and characterization flows
 * General timing characterization parameters
 <details>
@@ -235,4 +247,59 @@
 
 ![Screenshot from 2023-09-16 13-38-36](https://github.com/NishitaNJ/pes_pd/assets/142140741/152c252c-e6da-42ff-b9c8-9b389001e30b)
 
+</details>
+
+<details>
+    <summary>DAY2: Good floorplan vs Bad floorplan and introduction to library cells</summary>
+
+## Chip floor planning considerations:
+### Utilization factor and aspect ratio:
+* Defining the width and height of core and die:
+  - Netlist: Netlist describes the connectivity between all components of a design.
+  - **Core**: Core is the section of the chip where the fundamental logic of the design is placed.
+  - **Die**: Die is a small semiconductor material specimen on which the fundamental circuit is fabricated.
+  - Utilization factor:
+  
+    ![utifact](https://github.com/NishitaNJ/pes_pd/assets/142140741/524172fc-2296-4b8b-927b-383b58dfd8cb)
+
+  - Aspect Ratio:
+  
+    ![aspectratio](https://github.com/NishitaNJ/pes_pd/assets/142140741/b9164eb6-7d4c-4f61-a314-530203a4157b)
+
+### Concept of pre-placed cells:
+* **Pre-placed** cells are specialized functional blocks or IP cores that are manually positioned within a semiconductor chip's layout to provide optimized solutions for specific tasks.
+
+### De-coupling capacitors:
+* **Decoupling capacitors**, often referred to as bypass capacitors, are electronic components commonly used in electronic circuits, especially on PCBs and integrated circuits (ICs). Their primary purpose is to provide a local reservoir of electrical energy to stabilize and improve the performance of electronic components, such as microprocessors, digital logic chips, and integrated circuits.
+
+### Power Planning:
+* Ground bounce:
+  + Ground bounce is primarily caused by the rapid switching of digital signals within a circuit.
+  + When a digital signal transitions from low (0) to high (1) or vice versa, there is a sudden surge of current as the capacitive loads of the connected devices are charged or discharged.
+  + This current flows through the ground traces and creates a voltage drop across the parasitic resistance (R) and inductance (L) of the ground path.
+* Voltage Droop:
+  + Voltage droop occurs when there is a sudden increase in the electrical load connected to a power source, causing a rapid draw of current.
+  + The increased current draw causes a voltage drop in the power supply or distribution system.
+  + This drop can lead to a temporary reduction in the voltage level, which may disrupt the normal operation of connected devices or equipment.
+* **Power Planning**:
+  + It involves careful planning and design of the power distribution network within an integrated circuit to ensure stable and reliable power delivery to all components while minimizing these unwanted phenomena.
+  + Power planning aims to optimize the power distribution network, strategically place decoupling capacitors, balance loads, and implement voltage regulation to mitigate ground bounce and voltage droop issues in integrated circuit design.
+
+### Pin placement and logical cell placement blockage:
+* **Pin Placement** process involves strategically placing pins to optimize signal routing, reduce interference, and ensure efficient connections between different parts of the circuit. Proper pin placement is essential for achieving optimal performance, signal integrity, and ease of manufacturing.
+* **Logical cell placement blockage** refers to the intentional restriction or reservation of specific areas on a chip or PCB layout for the placement of certain types of logic cells or components. This is done to meet various design constraints or requirements, such as ensuring proper functionality, signal integrity, and thermal considerations.
+
+### Steps to run floorplan using OpenLANE:
+* To implement floorplanning: `run_floorplan`
+
+### Review floorplan layout in Magic:
+* To open the floorplan:
+* To the align the layout press 's' and 'v'
+* Zoomed in view:
+* We can check the details of the ports as follows:
+    + Hover over a port with your crosshair and press 's' on your keyboard
+    + Now open the tkcon command window and type `what`.
+    + This will show you the details of the selected port.
+* Standard cells:
+  
 </details>
