@@ -347,8 +347,17 @@
 * To view the placement use the command `run_placement`
 * Here 'Global placement' takes place which aims at reducing the wire length.
 * OpenLANE follows half parameter wirelength.
+  
+![Screenshot from 2023-09-17 21-36-07](https://github.com/NishitaNJ/pes_pd/assets/142140741/20698e7b-525d-4131-8bcb-662df2dea90c)
 
 * To view the placement, in the results directory type `cd placement`.
+
+![Screenshot from 2023-09-17 21-41-19](https://github.com/NishitaNJ/pes_pd/assets/142140741/69410059-d255-4983-bba0-55cd343e36fd)
+
 * Layout:
+
+![Screenshot from 2023-09-17 21-42-12](https://github.com/NishitaNJ/pes_pd/assets/142140741/bb9f6c09-a2a6-4c27-8b1b-e43e50296487)
+
+![Screenshot from 2023-09-17 21-43-35](https://github.com/NishitaNJ/pes_pd/assets/142140741/3df63bfd-a892-4c15-9eec-e20e0f0b9a28)
 
 </details>
