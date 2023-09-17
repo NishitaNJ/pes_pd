@@ -46,7 +46,13 @@
   + [Need for libraries and characterization](#need-for-libraries-and-characterization)
   + [Congestion aware placement using RePlAce](#congestion-aware-placement-using-replace)
 * Cell design and characterization flows
+  + [Inputs for cell design flow](#cell-design-and-characterization-flows)
+  + [Circuit design step](#cell-design-and-characterization-flows)
+  + [Layout design step](#cell-design-and-characterization-flows)
+  + [Typical characterization flow](#typical-characterization-flow)
 * General timing characterization parameters
+  + [Timing threshold definitions](#timing-threshold-definitions)
+  + [Propagation delay and Transitions time](#propagation-delay-and-transition-time)
 <details>
   <summary>DAY1: Inception of open-source EDA, OpenLANE and Sky130 PDK</summary>
 
@@ -362,4 +368,37 @@
 
 ![Screenshot from 2023-09-17 21-43-35](https://github.com/NishitaNJ/pes_pd/assets/142140741/3df63bfd-a892-4c15-9eec-e20e0f0b9a28)
 
+## Cell design and characterization flow:
+* Standard cells are placed in the library.
+* Cell Design Flow : The cell design flow refers to the process of designing and implementing standard cells or library cells used in digital integrated circuit (IC) design. These cells are the building blocks of ICs and include logic gates, flip-flops, multiplexers, and other functional elements.
+* Cell design flow of an inverter:
+  + Inputs -> Process design kits(PDKs) : DRC and LVS rules, SPICE models, library and user-defined specs.
+  + Design Steps -> Circuit Design, Layout Design(Euler Path and Stick Diagram), Characterization.
+  + Outputs -> CDL(Circuit Description Language), GDSII, LEF, extracted spice netlist(.cir)
+
+* Characterization Flow
+  + This is for an inverter.
+    - Read the model files.
+    - Read the extracted SPICE netlist.
+    - Recognize the behaviour of the buffer.
+    - Attaching the necessary power sources
+    - Apply the stimulus, which is the input signal to the circuit.
+    - Read the sub-circuit of the inverter.
+    - Provide necessary output capacitances.
+    - Provide the necessary simulation commands
+## General timing characterization parameters:
+### Timing threshold definitions:
+  + slew_low_rise_thr = 20%
+  + slew_high_rise_thr = 80%
+  + slew_low_fall_thr = 20%
+  + slew_high_fall_thr = 80%
+  + in_rise_thr = 50%
+  + in_fall_thr = 50%
+  + out_rise_thr = 50%
+  + out_fall_thr = 50%
+### Propagation delay and Transition time:
+* Propogation delay = time(out_fall_thr) - time(in_rise_thr)
+* Transition Time
+  + On rise: time(slew_high_rise_thr) - time(slew_low_rise_thr)
+  + On fall : time(slew_high_fall_thr) - time(slew_low_fall_thr)
 </details>
