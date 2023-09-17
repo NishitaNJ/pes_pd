@@ -358,6 +358,8 @@
 
 ![Screenshot from 2023-09-17 21-42-12](https://github.com/NishitaNJ/pes_pd/assets/142140741/bb9f6c09-a2a6-4c27-8b1b-e43e50296487)
 
+* If we zoom in we can see the placement of the standard cells in the standard cell rows.
+
 ![Screenshot from 2023-09-17 21-43-35](https://github.com/NishitaNJ/pes_pd/assets/142140741/3df63bfd-a892-4c15-9eec-e20e0f0b9a28)
 
 </details>
