@@ -291,15 +291,26 @@
 
 ### Steps to run floorplan using OpenLANE:
 * To implement floorplanning: `run_floorplan`
+![Screenshot from 2023-09-17 18-29-28](https://github.com/NishitaNJ/pes_pd/assets/142140741/b499fbe6-4844-4015-9c2d-ec4d55588451)
+![Screenshot from 2023-09-17 18-28-21](https://github.com/NishitaNJ/pes_pd/assets/142140741/00942ca9-799e-45b2-a099-78c4614e3e7e)
 
 ### Review floorplan layout in Magic:
 * To open the floorplan:
+![Screenshot from 2023-09-17 19-13-20](https://github.com/NishitaNJ/pes_pd/assets/142140741/0aed5e26-447a-4022-b467-ba5479c3033e)
+
 * To the align the layout press 's' and 'v'
+![Screenshot from 2023-09-17 19-24-56](https://github.com/NishitaNJ/pes_pd/assets/142140741/ce82791a-2709-44ba-b63b-e37fad26ef56)
+
 * Zoomed in view:
+![Screenshot from 2023-09-17 19-26-55](https://github.com/NishitaNJ/pes_pd/assets/142140741/c363cd9d-c9fd-4ddd-a5b6-9f354bd28267)
+
 * We can check the details of the ports as follows:
     + Hover over a port with your crosshair and press 's' on your keyboard
     + Now open the tkcon command window and type `what`.
     + This will show you the details of the selected port.
+    ![Screenshot from 2023-09-17 19-30-14](https://github.com/NishitaNJ/pes_pd/assets/142140741/a7ccae53-044b-4a9b-aaee-cddcfda98220)
+
 * Standard cells:
-  
+  ![Screenshot from 2023-09-17 19-51-21](https://github.com/NishitaNJ/pes_pd/assets/142140741/0c8ceeb4-f9ac-4d5e-9aaa-acbd1fe61e8d)
+
 </details>
