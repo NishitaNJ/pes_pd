@@ -53,6 +53,18 @@
 * General timing characterization parameters
   + [Timing threshold definitions](#timing-threshold-definitions)
   + [Propagation delay and Transitions time](#propagation-delay-and-transition-time)
+
+## DAY3
+### Design library cell using Magic layout and ngspice characterization
+* Labs for CMOS inverter ngspice simulations
+  + [IO placer revision](#io-placer-revision)
+  + [Spice deck creation for CMOS inverter](#spice-deck-creation-for-cmos-inverter)
+  + [Spice simulation lab for CMOS inverter](#spice-simulation-and-switching-threshold-vm)
+  + [Switching threshold Vm](#spice-simulation-and-switching-threshold-vm)
+  + [Static and Dynamic simulation of CMOS inverter](#static-and-dynamic-simulation-of-cmos-inverter)
+  + [Lab steps to git clone vsdstdcelldesign](#lab-steps-to-git-clone-vsdstdcelldesign)
+* Inception of layout CMOS fabrication process
+* Sky 130 Tech file labs 
 <details>
   <summary>DAY1: Inception of open-source EDA, OpenLANE and Sky130 PDK</summary>
 
@@ -401,4 +413,79 @@
 * Transition Time
   + On rise: time(slew_high_rise_thr) - time(slew_low_rise_thr)
   + On fall : time(slew_high_fall_thr) - time(slew_low_fall_thr)
+</details>
+
+<details>
+    <summary>DAY3: Design library cell using Magic layout and ngspice characterization</summary>
+
+## Labs for CMOS inverter ngspice simulations:
+### IO placer revision
+* OpenLANE allows the user to make changes to the environment variables on the fly.
+* As observed earlier, the pins are equidistant from each other.
+* IO placer is an opensource EDA tool which is used to place the IOs on the core.
+* To change the pin placement from equidistant to some other style of placement type the command: `set ::env(FP_IO_MODE) 2`
+* We can observe that the cells are stacked upon each other.
+
+### Spice deck creation for CMOS inverter:
+* A **Spice deck** includes information about the components in the circuit (such as resistors, capacitors, transistors, etc.), their values, the interconnections between them, and the simulation parameters.
+* Writing a Spice deck includes:
+  + Model description
+  + Netlist description
+  + Component connectivity
+  + Component values
+  + Capacitance load
+  + Nodes
+  + Simulation type and parameters
+  + Libraries included
+### Spice simulation and switching threshold Vm:
+
+![spice simulation](https://github.com/NishitaNJ/pes_pd/assets/142140741/80fca1a7-554a-4521-951b-4e2b0f173cbe)
+
+* The CMOS on the right side has a bigger size than the one on the left.
+* These waveforms tell us that the CMOS is a very robust device. The characteristics of the CMOS are maintained across a variety of sizes.
+* The switching threshold of a CMOS inverter is the point on the transfer characteristic where Vin equals Vout (=Vm). At this point both PMOS and NMOS are in ON state which gives rise to a leakage current.
+
+### Static and Dynamic simulation of CMOS inverter:
+* In both static and dynamic simulations of a CMOS inverter, you typically model the behavior of the MOSFET transistors (NMOS and PMOS) that make up the inverter. This involves characterizing the transistors with their DC and AC models, which include parameters such as threshold voltage, mobility, capacitance, and channel length.
+* Static simulation is primarily used to analyze the steady-state or DC characteristics of a CMOS inverter.
+* Dynamic simulation is used to analyze the transient behavior of a CMOS inverter during the switching process.
+
+### Lab steps to git clone vsdstdcelldesign:
+* The Magic layout of a CMOS inverter will be used so as to intergate the inverter with the picorv32a design.
+* To do this, inverter magic file is sourced from vsdstdcelldesign by cloning it within the `openlane_working_dir/openlane` directory as follows:
+  + `git clone https://github.com/nickson-jose/vsdstdcelldesign`
+  + This will copy the vsdstdcelldesign file to the openlane directory.
+* Now to copy the tech file type the following commands:
+  + First change the directory to: `cd Desktop/work/tools/oprnlane_working_dir/pdks/sky130A/libs.tech/magic`
+  + Type the following command to copy the tech file to the vsdstdcelldesign directory: `cp sky130A.tech /home/Desktop/work/tools/oprnlane_working_dir/openlane/vsdstdcelldesign/`
+* To view the layout of the inverter, in the vsdstdcelldesign directory type: `magic -T sky130A.tech sky130_inv.mag`.
+
+## Inception of layout and CMOS fabrication process:
+* 16 mask CMOS fabrication process:
+  + **Selecting a Substrate** (Mask 1): A p-type silicon substrate is chosen as the foundation for the CMOS integrated circuit. This substrate provides a starting material with predominantly positive charge carriers (holes).
+  + **Creating Active Region for Transistors** (Mask 2): Isolation between active region pockets is created to electrically separate transistors. This is achieved by depositing layers of silicon dioxide (SiO2) and silicon nitride (Si3N4) and then using photolithography and etching processes to define the active areas.
+  + **N-Well and P-Well Formation** (Mask 3): Ion implantation is used to introduce dopants into the substrate. Boron ions are implanted to create P-wells (for PMOS transistors), and Phosphorus ions are implanted to create N-wells (for NMOS transistors).
+  + **Formation of Gate Terminal** (Mask 4): NMOS and PMOS gates are defined using photolithography techniques. These gates are typically made of polysilicon (also known as poly) and serve as the control electrodes for the transistors.
+  + **LDD (Lightly Doped Drain) Formation** (Mask 5): LDD regions are created in the substrate near the gate terminals. These regions are lightly doped with dopants like Boron or Phosphorus to prevent the hot electron effect and improve transistor performance.
+  + **Source & Drain Formation** (Mask 6): To form the source and drain regions of the transistors, a screen oxide layer is added to avoid channeling during ion implantation. Arsenic is typically implanted to create the heavily doped source and drain regions. An annealing process is then performed to activate the dopants.
+  + **Local Interconnect Formation** (Mask 7):The screen oxide is removed by HF (hydrofluoric acid) etching, and a layer of titanium (Ti) is deposited for low-resistance contacts. This step allows for electrical connections to the transistors.
+  + **Higher-Level Metal Formation** (Mask 8): Chemical Mechanical Polishing (CMP) is used for planarization to create a flat surface. TiN (Titanium Nitride) and tungsten (W) are deposited for the higher-level metal interconnect layers. A top layer of silicon nitride (SiN) may be added for chip protection.
+### Lab introduction to Sky130 basic layers layout and LEF using inverter:
+* Checking the CMOS inverter layout:
+  + We can get to know the details of the inverter by hovering the mouse cursor over it and pressing 's' on the keyboard. Then we can type what in the tkcon.
+  + Pressing 's' three times will show what parts are connected to the selected part.
+  + We shall look at the difference between LEF and Layout. The above image is a Layout.
+  + LEF represents abstract component data in a machine-readable format for IC libraries, while layout is the physical geometric arrangement of these components on a semiconductor chip.
+### Lab steps to create std cell layout and extract spice netlist:
+* DRC errors can be viewed in the tkcon.
+* To extract Spice Netlist we perform the following steps in the tkcon window:
+* We can see that a sky130_inv.spice file is created.
+
+## Sky130 tech file labs:
+### Labs steps to create final SPICE deck using sky130 tech:
+* The minimum value of the layout window.
+* We can use 'g' on the keyboard to activate the grid and after selecting a grid by right clicking on the mouse, we type `box` in tkcon window to check the minimum value of the layout window.
+
+### Labs steps to characterize inverter using sky130 model files:
+
 </details>
