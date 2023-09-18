@@ -423,8 +423,13 @@
 * OpenLANE allows the user to make changes to the environment variables on the fly.
 * As observed earlier, the pins are equidistant from each other.
 * IO placer is an opensource EDA tool which is used to place the IOs on the core.
+
+![Screenshot from 2023-09-18 11-55-57](https://github.com/NishitaNJ/pes_pd/assets/142140741/b023a9c5-8f9f-4ac2-8c56-6fcba4bc0877)
+
 * To change the pin placement from equidistant to some other style of placement type the command: `set ::env(FP_IO_MODE) 2`
 * We can observe that the cells are stacked upon each other.
+
+![Screenshot from 2023-09-18 12-03-02](https://github.com/NishitaNJ/pes_pd/assets/142140741/b75580b9-87a4-4331-a469-a18f5a863c40)
 
 ### Spice deck creation for CMOS inverter:
 * A **Spice deck** includes information about the components in the circuit (such as resistors, capacitors, transistors, etc.), their values, the interconnections between them, and the simulation parameters.
@@ -455,10 +460,15 @@
 * To do this, inverter magic file is sourced from vsdstdcelldesign by cloning it within the `openlane_working_dir/openlane` directory as follows:
   + `git clone https://github.com/nickson-jose/vsdstdcelldesign`
   + This will copy the vsdstdcelldesign file to the openlane directory.
+
+![Screenshot from 2023-09-18 14-54-07](https://github.com/NishitaNJ/pes_pd/assets/142140741/20270b93-1477-46ad-bfda-edad74fdfd98)
+
 * Now to copy the tech file type the following commands:
   + First change the directory to: `cd Desktop/work/tools/oprnlane_working_dir/pdks/sky130A/libs.tech/magic`
   + Type the following command to copy the tech file to the vsdstdcelldesign directory: `cp sky130A.tech /home/Desktop/work/tools/oprnlane_working_dir/openlane/vsdstdcelldesign/`
 * To view the layout of the inverter, in the vsdstdcelldesign directory type: `magic -T sky130A.tech sky130_inv.mag`.
+
+![Screenshot from 2023-09-18 15-14-10](https://github.com/NishitaNJ/pes_pd/assets/142140741/01db0999-e920-4449-9d15-2cb07f8f7e62)
 
 ## Inception of layout and CMOS fabrication process:
 * 16 mask CMOS fabrication process:
@@ -473,19 +483,165 @@
 ### Lab introduction to Sky130 basic layers layout and LEF using inverter:
 * Checking the CMOS inverter layout:
   + We can get to know the details of the inverter by hovering the mouse cursor over it and pressing 's' on the keyboard. Then we can type what in the tkcon.
+  
+  ![Screenshot from 2023-09-18 15-45-37](https://github.com/NishitaNJ/pes_pd/assets/142140741/cf9b2594-b2f5-4ffd-b695-801bd46eff9b)
+
+  ![Screenshot from 2023-09-18 15-46-37](https://github.com/NishitaNJ/pes_pd/assets/142140741/bfc3e2fe-0e26-4ab2-9844-3a5a98eebc40)
+
   + Pressing 's' three times will show what parts are connected to the selected part.
+  
+  ![Screenshot from 2023-09-18 15-48-47](https://github.com/NishitaNJ/pes_pd/assets/142140741/53601e4b-8d73-49c5-9ac6-2828162477ec)
+
   + We shall look at the difference between LEF and Layout. The above image is a Layout.
   + LEF represents abstract component data in a machine-readable format for IC libraries, while layout is the physical geometric arrangement of these components on a semiconductor chip.
 ### Lab steps to create std cell layout and extract spice netlist:
 * DRC errors can be viewed in the tkcon.
+
+  ![Screenshot from 2023-09-18 16-23-28](https://github.com/NishitaNJ/pes_pd/assets/142140741/49ff6811-a271-48ae-b9fa-0c539f910b56)
+
+  ![Screenshot from 2023-09-18 16-23-56](https://github.com/NishitaNJ/pes_pd/assets/142140741/d15c3585-f929-4670-9979-ae3e6469068f)
+
 * To extract Spice Netlist we perform the following steps in the tkcon window:
-* We can see that a sky130_inv.spice file is created.
+
+![Screenshot from 2023-09-18 16-34-50](https://github.com/NishitaNJ/pes_pd/assets/142140741/cab1ac16-d240-4e7e-9007-7af0bd2094b8)
+
+* We can see that a `sky130_inv.spice` file is created.
+
+![Screenshot from 2023-09-18 16-35-04](https://github.com/NishitaNJ/pes_pd/assets/142140741/e91bb14f-ca50-4860-8fbb-816171ca405b)
 
 ## Sky130 tech file labs:
 ### Labs steps to create final SPICE deck using sky130 tech:
 * The minimum value of the layout window.
 * We can use 'g' on the keyboard to activate the grid and after selecting a grid by right clicking on the mouse, we type `box` in tkcon window to check the minimum value of the layout window.
 
+![Screenshot from 2023-09-18 17-12-29](https://github.com/NishitaNJ/pes_pd/assets/142140741/455bf6cd-4b0d-42b1-9944-8468d5bf6488)
+
+* Next we need open the spice file using the command: `vim sky130_inv.spice`
+
+![Screenshot from 2023-09-18 18-19-36](https://github.com/NishitaNJ/pes_pd/assets/142140741/899f0204-aec2-40fc-99f3-fd27bfa9f838)
+
 ### Labs steps to characterize inverter using sky130 model files:
+
+![Screenshot from 2023-09-18 18-25-59](https://github.com/NishitaNJ/pes_pd/assets/142140741/ff6e5e98-5998-47e9-b354-fa0c09eb69c8)
+
+* We now plot the graph for output vs input sweeping the time.
+* `plot y vs time a`
+
+![plotgraph](https://github.com/NishitaNJ/pes_pd/assets/142140741/24505d16-b354-430f-9aee-483c566b305e)
+
+* Rise Time -> time taken to rise from 20% to 80% of the max value -> 2.25075e-09 - 2.184e-09 = 0.006675e-09 s.
+
+![plotgraph1](https://github.com/NishitaNJ/pes_pd/assets/142140741/fb1176df-3aee-468e-add5-2b07f6464105)
+
+![plotgraph2](https://github.com/NishitaNJ/pes_pd/assets/142140741/d36a7782-6c0c-4051-80b0-8fd5d7902824)
+
+* Propogation Delay/Cell Rise Delay -> 2.21379e-09 - 2.15e-09 = 0.06379e-09 s.
+
+![plotgraph3](https://github.com/NishitaNJ/pes_pd/assets/142140741/541b22db-16f5-4b1e-8cee-6f188cb2f2ca)
+
+![plotgraph4](https://github.com/NishitaNJ/pes_pd/assets/142140741/1c4d7a88-07ec-4cf9-a86b-f23242bbccec)
+
+### Lab introduction to magic tool options and DRC rules:
+* To know in detail about this tool visit: opencircuitdesign.com
+
+### Lab introduction to sky130 pdk's and steps to download lab:
+* Type the command: `wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz`
+
+![Screenshot from 2023-09-18 18-55-45](https://github.com/NishitaNJ/pes_pd/assets/142140741/11c9e294-64c1-4bbc-8bc2-06725ac66d6a)
+
+* To move the file to desktop: `mv drc_tests.tgz Desktop/`
+* To extract the file: `tar xfz drc_tests.tgz`
+* Type `ls` to view all the files in it.
+
+![Screenshot from 2023-09-18 19-00-23](https://github.com/NishitaNJ/pes_pd/assets/142140741/b0d7bc63-bb02-410c-bb64-7796c7437baa)
+
+### Lab introduction to magic and steps to load Sky130 tech-rules:
+
+* To open the software we type: `magic -d XR`
+
+![Screenshot from 2023-09-18 19-36-40](https://github.com/NishitaNJ/pes_pd/assets/142140741/3e56154a-8aaf-4f54-ac3f-411cccfa2771)
+
+* We click 'file' and open the 'met3.mag' file.
+
+![Screenshot from 2023-09-18 19-38-16](https://github.com/NishitaNJ/pes_pd/assets/142140741/55820344-9609-4bac-92da-3c4c4e8dc9a8)
+
+* To know about the error, select an area and type the command: `drc why`, in the tkcon window.
+
+![Screenshot from 2023-09-18 20-25-35](https://github.com/NishitaNJ/pes_pd/assets/142140741/46e74703-aa88-423f-af4a-08ef3ebcfc17)
+
+* To add contact cuts to metal3, first select an area using left and right click. Then hovering over the m3contact we click middle mouse button.
+* And in the tkcon window type: `cif see VIA2`
+
+![Screenshot from 2023-09-18 20-37-20](https://github.com/NishitaNJ/pes_pd/assets/142140741/634d5bdc-03b1-4cee-971f-fa2c79c2f4eb)
+
+### Lab exercise to fix poly.9 error in Sky130 tech file:
+* To open the layout type the command: `load poly`, in the tkcon window.
+
+![Screenshot from 2023-09-18 21-33-49](https://github.com/NishitaNJ/pes_pd/assets/142140741/ca764192-457e-4765-b8ca-9be33a090f3f)
+
+* There is an error in the poly.mag file.
+
+  ![Screenshot from 2023-09-18 21-47-58](https://github.com/NishitaNJ/pes_pd/assets/142140741/19877095-d82d-4acb-996a-6b0a80c20142)
+
+  ![Screenshot from 2023-09-18 21-53-16](https://github.com/NishitaNJ/pes_pd/assets/142140741/e8453d82-5aed-4433-8e4c-2247ee554e35)
+
+* Make the following changes:
+
+![Screenshot from 2023-09-18 22-02-01](https://github.com/NishitaNJ/pes_pd/assets/142140741/7b0e5600-a372-4c5a-b8a8-431de3e9c35e)
+
+![Screenshot from 2023-09-18 22-00-20](https://github.com/NishitaNJ/pes_pd/assets/142140741/a00595c1-e975-4d65-b964-ff160de415bb)
+
+* `tech load sky130A.tech`
+* `drc check`
+
+![Screenshot from 2023-09-18 22-05-03](https://github.com/NishitaNJ/pes_pd/assets/142140741/f967c052-f64c-445f-ae54-3d11ef43f25c)
+
+* We can observe that the error is fixed now.
+
+### Lab exercise to implement polyresister spacing to diff and tap:
+* To correct this error make the following changes:
+
+![Screenshot from 2023-09-18 22-13-27](https://github.com/NishitaNJ/pes_pd/assets/142140741/c55afff3-7c3a-4564-8ea4-da4d1dc6786b)
+
+![Screenshot from 2023-09-18 22-13-48](https://github.com/NishitaNJ/pes_pd/assets/142140741/410ecc90-d0d7-42cd-9cb6-705ea2dbcfd5)
+
+### Lab challenge exercise to describe DRC error as geometrical construct:
+* Open the nwell.mag file.
+
+![Screenshot from 2023-09-18 22-19-48](https://github.com/NishitaNJ/pes_pd/assets/142140741/43ab43a8-8243-4e62-9dd8-bc80ffe13940)
+
+* Type the following commands:
+  + `cif ostyle drc`
+  + `cif see dnwell_shrink`
+  + `cif see nwell_missing`
+
+![Screenshot from 2023-09-18 22-24-12](https://github.com/NishitaNJ/pes_pd/assets/142140741/653f3c40-d35a-494e-b74d-f9b0fa50e7bf)
+
+### Lab challenge to find missing or incorrect rules and fix them:
+
+![Screenshot from 2023-09-18 22-37-09](https://github.com/NishitaNJ/pes_pd/assets/142140741/b28a6177-e0e6-4cd1-ad7f-f7592d86c14f)
+
+![nwell](https://github.com/NishitaNJ/pes_pd/assets/142140741/4882c616-ff3e-4985-8d21-28318ae44502)
+
+* Make the following changes:
+
+![Screenshot from 2023-09-18 22-51-39](https://github.com/NishitaNJ/pes_pd/assets/142140741/5692a4ce-66e0-4c3e-ab35-517ef3f20117)
+
+![Screenshot from 2023-09-18 22-49-09](https://github.com/NishitaNJ/pes_pd/assets/142140741/2113b2db-32e4-4c93-8ac6-e7dc968d95c4)
+
+* Run the below commands:
+
+  ![Screenshot from 2023-09-18 22-56-34](https://github.com/NishitaNJ/pes_pd/assets/142140741/b3f00cd9-5134-41fd-9779-38983c6869f3)
+
+* We observe that the error is still seen.
+
+  ![nwell1](https://github.com/NishitaNJ/pes_pd/assets/142140741/760516b9-8b7f-47e2-aae7-1091ee085e2c)
+
+* To correct this error:
+  + Select the nwell.4
+  + Make a copy of it.
+  + Now select a small area on the nwell.4 and add an 'nsubstratecontact'.
+
+  ![nwell2](https://github.com/NishitaNJ/pes_pd/assets/142140741/dc6ce85b-bd23-4601-800c-b1c6d6ffdcdf)
 
 </details>
