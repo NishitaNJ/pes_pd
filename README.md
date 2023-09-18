@@ -64,7 +64,25 @@
   + [Static and Dynamic simulation of CMOS inverter](#static-and-dynamic-simulation-of-cmos-inverter)
   + [Lab steps to git clone vsdstdcelldesign](#lab-steps-to-git-clone-vsdstdcelldesign)
 * Inception of layout CMOS fabrication process
-* Sky 130 Tech file labs 
+  + [Create active regions](#inception-of-layout-cmos-fabrication-process)
+  + [Formation of N-well and P-well](#inception-of-layout-cmos-fabrication-process)
+  + [Formation of gate terminal](#inception-of-layout-cmos-fabrication-process)
+  + [Lightly doped drain(LDD) formation](#inception-of-layout-cmos-fabrication-process)
+  + [Source and Drain formation](#inception-of-layout-cmos-fabrication-process)
+  + [Local interconnect formation](#inception-of-layout-cmos-fabrication-process)
+  + [Higher level metal formation](#inception-of-layout-cmos-fabrication-process)
+  + [Lab introduction to Sky130 basic layers layout and LEF using inverter](#lab-introduction-to-sky130-basic-layers-layout-and-lef-using-inverter)
+  + [Lab steps to create std cell layout and extract spice netlist](#lab-steps-to-create-std-cell-layout-and-extract-spice-netlist)
+* Sky 130 Tech file labs
+  + [Lab steps to create final SPICE deck using Sky130 tech](#lab-steps-to-create-final-spice-deck-using-sky130-tech)
+  + [Lab steps to characterize inverter using sky130 model files](#lab-steps-to-characterize-inverter-using-sky130-model-files)
+  + [Lab introduction to magic tool options and DRC rules](#lab-introduction-to-magic-tool-options-and-drc-rules)
+  + [Lab introduction to Sky130 pdk's and steps to download labs](#lab-introduction-to-sky130-pdk's-and-steps-to-download-labs)
+  + [Lab introduction to Magic and steps to load Sky130 tech-rules](#lab-introduction-to-magic-and-steps-to-load-sky130-tech-rules)
+  + [Lab exercise to fix poly.9 error in Sky130 tech-file](#lab-exercise-to-fix-poly.9-error-in-sky130-tech-file)
+  + [Lab exercise to implement poly resistor spacing to diff and tap](#lab-exercise-to-implement-poly-resistor-spacing-to-diff-and-tap)
+  + [Lab challenge exercise to describe DRC error as geometrical construct](#lab-challenge-exercise-to-describe-drc-error-as-geometrical-construct)
+  + [Lab challenge to find missing or incorrect rules and fix them](#lab-challenge-to-find-missing-or-incorrect-rules-and-fix-them)   
 <details>
   <summary>DAY1: Inception of open-source EDA, OpenLANE and Sky130 PDK</summary>
 
