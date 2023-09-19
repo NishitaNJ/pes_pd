@@ -730,9 +730,77 @@
   ![Screenshot from 2023-09-19 11-23-31](https://github.com/NishitaNJ/pes_pd/assets/142140741/8dfe376f-72f1-4df1-a5c8-e6d0ca7cc279)
 
 * After modifying the config.tcl file, run the following commands on openLANE flow:
+  + `./flow.tcl -interactive`
+  + `package require openlane 0.9`
   + `prep -design picorv32a -tag 02-07_07-56 -overwrite`
   + `set lefs [glob $::env(DESIGN_DIR)/src/*.lef]`
   + `add_lefs -src $lefs`
   + `run_synthesis`
+* The vsdinv cell has been used in the synthesis:
+ 
+![Screenshot from 2023-09-19 15-06-37](https://github.com/NishitaNJ/pes_pd/assets/142140741/51c9f1b9-a4b7-480d-8922-f613c8011a37)
+
+![Screenshot from 2023-09-19 15-06-49](https://github.com/NishitaNJ/pes_pd/assets/142140741/f78e6630-1e86-46a7-9b63-17c733d0a862)
+
+### Lab steps to configure synthesis settings to fix slack and include vsdinv:
+* Ways to fix slack
+  + Changing synthesis strategy in OpenLANE
+    - Enalbed CELL_SIZING
+    - Enabled SYNTH_STRATEGY with parameter as DELAY 1
+* The delay is high when the fanout is high we can re-run synthesiwith different values of SYNTH_MAX_FANOUT variable
+  + Enable cell buffering
+  + Perform manual cell replacement on our WNS path with the OpenSTA tool
+  + Optimize the fanout value with OpenLANE tool
+* First to check the strategy value: `echo $::env(SYNTH_STRATEGY)`
+* Now set the value to 1: `set ::env(SYNTH_STRATEGY) 1`
+* Similarly make the following changes:
+  
+![Screenshot from 2023-09-19 15-42-07](https://github.com/NishitaNJ/pes_pd/assets/142140741/8073a991-8a32-495c-889f-b1d4556ed310)
+
+* Now run synthesis
+* Next step is to run the floorplan: `init_floorplan`
+
+![Screenshot from 2023-09-19 16-03-28](https://github.com/NishitaNJ/pes_pd/assets/142140741/0d7146f2-55ac-4ec4-8e56-d0767346fa9b)
+
+* Next step: `run_placement`
+
+![Screenshot from 2023-09-19 16-07-48](https://github.com/NishitaNJ/pes_pd/assets/142140741/4e869883-d4d2-4bbe-b465-7bdc8a628ad0)
+
+* Next step is to check the layout invoke:
+
+![Screenshot from 2023-09-19 16-15-42](https://github.com/NishitaNJ/pes_pd/assets/142140741/76bd5ff4-d9df-4401-ae00-341e242ddca0)
+
+![Screenshot from 2023-09-19 16-20-41](https://github.com/NishitaNJ/pes_pd/assets/142140741/e6f2c0bf-b436-451f-9cbd-aefce16146b9)
+
+![Screenshot from 2023-09-19 16-24-35](https://github.com/NishitaNJ/pes_pd/assets/142140741/8065d88c-13ca-4017-94d4-8bc050a42a4a)
+
+* To view the alignment type: `expand`, in the tkcon window.
+
+![Screenshot from 2023-09-19 16-26-21](https://github.com/NishitaNJ/pes_pd/assets/142140741/c5756575-206f-49cf-99fa-fe2d11066eb6)
+
+## Timing analysis with ideal clocks using openSTA:
+### Setup time analysis and introduction to flip-flop setup time:
+### Introduction to clock jitter and uncertainty:
+
+## Clock tree synthesis tritonCTS and signal integrity:
+### Clock tree routing and buffering using H-tree algorithm:
+### Crosstalk and clock net shielding:
+### Labs steps to run CTS using tritonCTS:
+* To run the CTS type the command: `run_cts`
+* This step will create a new 'cts' file in the synthesis directory.
+
+![Screenshot from 2023-09-19 17-29-17](https://github.com/NishitaNJ/pes_pd/assets/142140741/9dc9b3a4-272a-4617-affc-6742965a625a)
+
+![Screenshot from 2023-09-19 17-31-01](https://github.com/NishitaNJ/pes_pd/assets/142140741/f335e71f-c771-4fbb-8ca0-08b7017f68eb)
+
+## Timing analysis with real clocks using openSTA:
+### Setup time analysis using real clocks:
+### Hold time analysis using real clocks:
+### Labs steps to analyze timing with real clocks using openSTA:
+
+![Screenshot from 2023-09-19 18-06-19](https://github.com/NishitaNJ/pes_pd/assets/142140741/d4b39e9d-e1bf-42d0-bdfe-ab4e6e0d57fd)
+
+![Screenshot from 2023-09-19 18-07-00](https://github.com/NishitaNJ/pes_pd/assets/142140741/6c1414b4-464d-475e-9c9a-9886d6850392)
+
 
 </details>
