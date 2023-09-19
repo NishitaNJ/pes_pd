@@ -802,5 +802,22 @@
 
 ![Screenshot from 2023-09-19 18-07-00](https://github.com/NishitaNJ/pes_pd/assets/142140741/6c1414b4-464d-475e-9c9a-9886d6850392)
 
+</details>
+
+<details>
+    <summary>DAY5: Final steps for RTL2GDS using tritonRoute and openSTA</summary>
+
+## Routing and design rule check(DRS):
+### Introduction to maze routing and LeeAnds algorithm:
+### LeeAnds algorithm conclusion:
+### Design rule check:
+## Power distribution network and routing:
+### Lab steps to build power distribution network:
+### Lab steps from power straps to std cell power:
+### Basics of global and detail routing and configure TritonRoute:
+## TritonRoute features:
+### Triton features:
+### Triton route method to handle connectivity:
+### Routing topology algorithm final files list post-route:
 
 </details>
