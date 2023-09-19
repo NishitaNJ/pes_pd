@@ -82,7 +82,16 @@
   + [Lab exercise to fix poly.9 error in Sky130 tech-file](#lab-exercise-to-fix-poly.9-error-in-sky130-tech-file)
   + [Lab exercise to implement poly resistor spacing to diff and tap](#lab-exercise-to-implement-poly-resistor-spacing-to-diff-and-tap)
   + [Lab challenge exercise to describe DRC error as geometrical construct](#lab-challenge-exercise-to-describe-drc-error-as-geometrical-construct)
-  + [Lab challenge to find missing or incorrect rules and fix them](#lab-challenge-to-find-missing-or-incorrect-rules-and-fix-them)   
+  + [Lab challenge to find missing or incorrect rules and fix them](#lab-challenge-to-find-missing-or-incorrect-rules-and-fix-them)
+
+## DAY4
+### Pre-layout timing analysis and importance of good clock tree
+* Timing modelling using delay tables
+  + [Lab steps to convert grid info to track info](#lab-steps-to-convert-grid-info-to-track-info)
+  + [Lab steps to convert magic layout to std cell LEF](#lab-steps-to-convert-magic-layout-to-std-cell-lef) 
+* Timing analysis with ideal clocks using openSTA
+* Clock tree synthesis Triton CTS and Signal integrity
+* Timing analysis with real clocks using openSTA
 <details>
   <summary>DAY1: Inception of open-source EDA, OpenLANE and Sky130 PDK</summary>
 
@@ -662,4 +671,21 @@
 
   ![nwell2](https://github.com/NishitaNJ/pes_pd/assets/142140741/dc6ce85b-bd23-4601-800c-b1c6d6ffdcdf)
 
+</details>
+
+
+<details>
+    <summary>DAY4: Pre-layout timing analysis and importance of good clock tree</summary>
+
+## Timing modelling using delay tables:
+### Lab steps to convert grid info to track info:
+* Certain guidelines to follow while making a std cell:
+  + The input and output ports must lie on the intersection of the vertical and the horizontal tracks.
+  + The width of the std cell should be odd multiples of track pitch and the height should be odd multiples of track vertical pitch.
+* To view the track file:
+  + `cd Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/openlane/sky130_fd_hc_sd/`
+  + `less tracks.info`
+## Timing analysis with ideal clocks using openSTA:
+## Clock tree synthesis Triton CTS and Signal integrity:
+## Timing analysis with real clocks using openSTA:
 </details>
