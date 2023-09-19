@@ -12,7 +12,9 @@
   + To check if the toolchains are installed, run: `package require openlane 0.9`
   + The above code will give back `0.9` which means the package is already installed.
   + run: `prep -design picorv32a`, to check for the working of tools.
-## TABLE OF CONTENTS
+<details>
+    <summary>TABLE OF CONTENTS</summary>
+
 ## DAY1
 ### Inception of open-source EDA, OpenLANE and Sky130 PDK
 * How to talk to computers
@@ -88,10 +90,32 @@
 ### Pre-layout timing analysis and importance of good clock tree
 * Timing modelling using delay tables
   + [Lab steps to convert grid info to track info](#lab-steps-to-convert-grid-info-to-track-info)
-  + [Lab steps to convert magic layout to std cell LEF](#lab-steps-to-convert-magic-layout-to-std-cell-lef) 
+  + [Lab steps to convert magic layout to std cell LEF](#lab-steps-to-convert-magic-layout-to-std-cell-lef)
+  + [Introduction to timing libs and steps to include new cell in synthesis](#introduction-to-timing-libs-and-steps-to-include-new-cell-in-synthesis)
+  + [Lab steps to configure synthesis settings to fix slack and include vsdinv](#lab-steps-to-configure-synthesis-settings-to-fix-slack-and-include-vsdinv)
 * Timing analysis with ideal clocks using openSTA
+  + [Setup time analysis and introduction to flip-flop setup time](#setup-time-analysis-and-introduction-to-flip-flop-setup-time)
+  + [Introduction to clock jitter and uncertainty](#introduction-to-clock-jitter-and-uncertainty)
 * Clock tree synthesis Triton CTS and Signal integrity
+  + [Clock tree routing and buffering using H-tree algorithm](#clock-tree-routing-and-buffering-using-h-tree-algorithm)
+  + [Crosstalk and clock net shielding](#crosstalk-and-clock-net-shielding)
+  + [Labs steps to run CTS using tritonCTS](#labs-steps-to-run-cts-using-tritoncts)
 * Timing analysis with real clocks using openSTA
+  + [Setup time analysis using real clocks](#setup-time-analysis-using-real-clocks)
+  + [Hold time analysis using real clocks](#hold-time-analysis-using-real-clocks)
+  + [Labs steps to analyze timing with real clocks using openSTA](#labs-steps-to-analyze-timing-with-real-clocks-using-opensta)
+
+## DAY5
+### Final steps for RTL2GDS using tritonRoute and openSTA
+* Routing and design rule check(DRC)
+  + [Introduction to maze routing and Lee's algorithm](#introduction-to-maze-routing-and-lee's-algorithm)
+  + [Lee's algorithm conclusion](#lee's-algorithm-conclusion)
+  + [Design rule check](#design-rule-check)
+* Power distribution network and routing
+  + [Lab steps to build power distribution network](#lab-steps-to-build-power-distribution-network)
+  + [Basics of global and detail routing and configure TritonRoute](#basics-of-global-and-detail-routing-and-configure-tritonroute)
+  + [Routing topology algorithm final files list post-route](#routing-topology-algorithm-final-files-list-post-route)
+</details>
 <details>
   <summary>DAY1: Inception of open-source EDA, OpenLANE and Sky130 PDK</summary>
 
@@ -831,7 +855,16 @@
 * The goal is to ensure that data remains unchanged for a specified duration after the clock edge, even in the presence of clock signal variations. Real clocks have finite rise and fall times, which means that data may experience changes in this transitional period.
 * Analyzing hold time with real clocks involves considering both the rising and falling clock edges and accounting for clock-to-Q delays. 
 ### Labs steps to analyze timing with real clocks using openSTA:
-
+* In OpenROAD the timing analysis is done by creating a .db database file. This database file is created from the post-cts LEF and DEF files. To generate the .db files within OpenROAD:
+  + Invoke OpenRoad
+  + Read lef file from tmp folder of runs
+  + Read def file from results of cts
+  + write db file
+  + Read the generated db file
+  + Read the cts generated verilog file
+  + read min and max liberty file
+  + set the clocks
+  + generate the reports
 ![Screenshot from 2023-09-19 18-06-19](https://github.com/NishitaNJ/pes_pd/assets/142140741/d4b39e9d-e1bf-42d0-bdfe-ab4e6e0d57fd)
 
 ![Screenshot from 2023-09-19 18-07-00](https://github.com/NishitaNJ/pes_pd/assets/142140741/6c1414b4-464d-475e-9c9a-9886d6850392)
