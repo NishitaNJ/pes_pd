@@ -683,9 +683,56 @@
   + The input and output ports must lie on the intersection of the vertical and the horizontal tracks.
   + The width of the std cell should be odd multiples of track pitch and the height should be odd multiples of track vertical pitch.
 * To view the track file:
-  + `cd Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/openlane/sky130_fd_hc_sd/`
+  + `cd Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/openlane/sky130_fd_sc_hd/`
   + `less tracks.info`
-## Timing analysis with ideal clocks using openSTA:
-## Clock tree synthesis Triton CTS and Signal integrity:
-## Timing analysis with real clocks using openSTA:
+  
+  ![Screenshot from 2023-09-19 09-26-07](https://github.com/NishitaNJ/pes_pd/assets/142140741/6cb8aea6-3c33-43e1-9003-09588650fd53)
+
+* To converge the grid definitions to according to track definitions, in the tkcon window type:
+  + `grid help`: this will show the format to fill in
+  + `grid 0.46um 0.34um 0.23um 0.17um`
+
+  ![Screenshot from 2023-09-19 09-34-00](https://github.com/NishitaNJ/pes_pd/assets/142140741/fe4c4c95-f3ea-4977-b731-b88587e1c7df)
+
+* Now we can observe that the input and output ports are at the intersection of vertical and horizontal tracks.
+
+![Screenshot from 2023-09-19 09-47-05](https://github.com/NishitaNJ/pes_pd/assets/142140741/9e86da8d-2691-427a-a005-c8af184aded5)
+
+* From the above picture we can also observe that the width has odd multiples of track pitch that is it has 3 boxes within the boundary.
+  
+### Lab steps to convert magic layout to std cell LEF:
+* Changing the name of the file:
+
+  ![Screenshot from 2023-09-19 10-09-06](https://github.com/NishitaNJ/pes_pd/assets/142140741/c08c733e-c02f-484e-9090-326116dbdd2e)
+
+  ![Screenshot from 2023-09-19 10-09-21](https://github.com/NishitaNJ/pes_pd/assets/142140741/be8f3bf3-fb24-49e7-9714-e32b926ef2b7)
+
+* Extraxting the LEF:
+  + In the tkcon window: `lef write`
+
+    ![Screenshot from 2023-09-19 10-17-41](https://github.com/NishitaNJ/pes_pd/assets/142140741/efe0681a-74b1-48ce-84c5-65fbe2029f49)
+
+    ![Screenshot from 2023-09-19 10-18-39](https://github.com/NishitaNJ/pes_pd/assets/142140741/76610dfc-970e-4762-bf76-d6c65236d83a)
+* LEF file:
+
+![Screenshot from 2023-09-19 10-27-12](https://github.com/NishitaNJ/pes_pd/assets/142140741/f741f727-5bef-4111-a660-646bcaa6060a)
+
+### Introduction to timing libs and steps to include new cell in synthesis
+* To include new cells in the synthesis:
+  + First copy the .lef file to the src directory
+  + And also copy all the .lib files to src directory
+
+  ![Screenshot from 2023-09-19 11-08-33](https://github.com/NishitaNJ/pes_pd/assets/142140741/877930cf-b16c-4098-aca1-5db8a7c2704c)
+
+  ![Screenshot from 2023-09-19 11-09-12](https://github.com/NishitaNJ/pes_pd/assets/142140741/386bb0e5-6131-45b3-9b9d-c966433a4b0c)
+* Modify the config.tcl file as follows:
+
+  ![Screenshot from 2023-09-19 11-23-31](https://github.com/NishitaNJ/pes_pd/assets/142140741/8dfe376f-72f1-4df1-a5c8-e6d0ca7cc279)
+
+* After modifying the config.tcl file, run the following commands on openLANE flow:
+  + `prep -design picorv32a -tag 02-07_07-56 -overwrite`
+  + `set lefs [glob $::env(DESIGN_DIR)/src/*.lef]`
+  + `add_lefs -src $lefs`
+  + `run_synthesis`
+
 </details>
