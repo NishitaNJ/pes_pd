@@ -780,11 +780,37 @@
 
 ## Timing analysis with ideal clocks using openSTA:
 ### Setup time analysis and introduction to flip-flop setup time:
+* Timing analysis with ideal clocks is a fundamental aspect of digital circuit design and verification.
+* "Ideal clocks" refer to clock signals that are assumed to have zero skew and zero jitter, simplifying the analysis by disregarding real-world clock signal imperfections.
+* The primary objective of timing analysis with ideal clocks is to ensure that a digital design operates correctly within specified timing constraints.
+* This analysis involves assessing whether signals meet setup and hold time requirements, as well as verifying that maximum clock-to-q delays in flip-flops or latches are not exceeded.
+
 ### Introduction to clock jitter and uncertainty:
+* Clock jitter can result from various sources, including electronic noise, power supply fluctuations, and signal interference.
+* Clock jitter refers to the deviation or variability in the timing of a clock signal from its ideal, periodic waveform.
+* On the other hand, clock uncertainty encompasses various sources of timing variability, including jitter, but also factors like clock skew and clock-to-clock variations.
+  + Clock Skew: Clock skew refers to the difference in arrival times of the clock signal at various points in the system. It can result from variations in trace lengths or delays in clock distribution networks.
+  + Clock-to-Clock Variations: Clock-to-clock variations account for differences between multiple clock domains within a system. These variations can affect the synchronization and data transfer between different parts of a design.
+  + Jitter and Phase Noise: Clock jitter contributes to clock uncertainty by introducing variations in the clock's rising and falling edges. Phase noise, a type of jitter, impacts the clock's phase and can affect communication systems' spectral purity and data integrity.
+  + Temperature and Voltage Variations: Changes in temperature and supply voltage can affect the clock's frequency and jitter characteristics. These variations can be especially important in mobile devices and other systems exposed to varying environmental conditions.
 
 ## Clock tree synthesis tritonCTS and signal integrity:
 ### Clock tree routing and buffering using H-tree algorithm:
+* Clock tree routing and buffering using the H-tree algorithm is a common technique in digital integrated circuit design.
+* The H-tree is a specific topology used to distribute clock signals efficiently and evenly to various parts of the chip while minimizing clock skew.
+  + H-Tree Topology: H-tree topology is used for clock distribution, resembling the letter "H" with a balanced hierarchical structure.
+  + Buffer Insertion: Clock buffers are inserted along the clock tree to maintain signal integrity and compensate for signal attenuation.
+  + Balanced Routing: The routing process aims to balance clock tree branches to minimize delays and clock skew.
+  + Clock Skew Minimization: H-tree structures inherently minimize clock skew, ensuring consistent clock arrival times.
+  + Timing Analysis: Post-routing timing analysis verifies that the clock tree meets setup and hold time constraints.
+  + Optimization: Iterative optimization may involve buffer sizing, placement changes, or re-routing to meet timing goals.
+  + Verification: Clock tree verification ensures the design meets power, performance, and reliability requirements.
+  + Iterative Refinement: Designers iterate on routing and buffering to resolve timing violations if detected during verification.
 ### Crosstalk and clock net shielding:
+* Crosstalk is unwanted interference between adjacent signal traces, causing signal distortion or corruption.
+* Types of Crosstalk: Common types include capacitive and inductive crosstalk, affecting signal integrity.
+* Techniques like spacing, shielding, and differential signaling can reduce crosstalk effects.
+* Clock net shielding involves isolating clock signals to minimize interference and crosstalk.
 ### Labs steps to run CTS using tritonCTS:
 * To run the CTS type the command: `run_cts`
 * This step will create a new 'cts' file in the synthesis directory.
@@ -795,7 +821,15 @@
 
 ## Timing analysis with real clocks using openSTA:
 ### Setup time analysis using real clocks:
+* Setup time analysis is a fundamental aspect of digital circuit design, ensuring that data signals are valid and stable before being clocked into flip-flops or latches.
+* When conducting setup time analysis using real clocks, engineers take into account the finite rise and fall times of actual clock signals.
+* Unlike idealized clocks, real clocks have characteristics that affect timing calculations.
+* In this analysis, both the rising and falling clock edges are considered, and the critical parameter is the clock-to-Q delay, which represents the time it takes for a signal to propagate from the clock edge to the output of flip-flops or latches. 
 ### Hold time analysis using real clocks:
+* Hold time analysis is an essential aspect of digital circuit design that focuses on ensuring the stability of data after a clock edge.
+* When conducting hold time analysis with real clocks, engineers consider the characteristics of actual clock signals, which have finite rise and fall times, unlike idealized clocks.
+* The goal is to ensure that data remains unchanged for a specified duration after the clock edge, even in the presence of clock signal variations. Real clocks have finite rise and fall times, which means that data may experience changes in this transitional period.
+* Analyzing hold time with real clocks involves considering both the rising and falling clock edges and accounting for clock-to-Q delays. 
 ### Labs steps to analyze timing with real clocks using openSTA:
 
 ![Screenshot from 2023-09-19 18-06-19](https://github.com/NishitaNJ/pes_pd/assets/142140741/d4b39e9d-e1bf-42d0-bdfe-ab4e6e0d57fd)
@@ -808,16 +842,78 @@
     <summary>DAY5: Final steps for RTL2GDS using tritonRoute and openSTA</summary>
 
 ## Routing and design rule check(DRS):
-### Introduction to maze routing and LeeAnds algorithm:
-### LeeAnds algorithm conclusion:
+### Introduction to maze routing and Lee's algorithm:
+* Maze Routing:
+  + Problem of finding a path through a maze or grid-like structure.
+  + Common in computer science, electrical engineering, and robotics.
+  + Involves navigating from a start point to a destination while avoiding obstacles.
+* Lee's Algorithm:
+  + A maze-solving algorithm developed by C. Y. Lee in the 1960s.
+  + Works with a 2D grid where cells can be empty, blocked, start, or destination.
+  + Steps:
+    - Start at the beginning cell with a value of 0.
+    - Expand a "wavefront" to adjacent cells with values one higher.
+    - Continue until reaching the destination or blocked cells.
+    - Trace back to find the path from start to destination.
+  + Efficient and widely used for finding the shortest path in grid-based environments.
+### Lee's algorithm conclusion:
+* In conclusion, Lee's algorithm, also known as Lee's wave algorithm, is a widely used and efficient approach for solving maze routing problems.
+* It works by propagating a wavefront from a starting point through a grid-like maze, assigning values to cells as it progresses.
+* The algorithm terminates when it reaches the destination or can no longer propagate due to obstacles.
+* Once the wavefront reaches the destination, it allows for the reconstruction of the shortest path from the start to the destination.
+* Lee's algorithm is commonly used in computer science, electrical engineering, robotics, and other fields where pathfinding and routing are essential.
 ### Design rule check:
+* Purpose of DRC:
+  + Ensures design layouts adhere to manufacturing constraints.
+  + Detects errors early to prevent manufacturing defects and reduce costs.
+* Key Aspects:
+  + Based on predefined design rules and constraints.
+  + Uses automated software tools to analyze designs.
+  + Checks include minimum sizes, clearances, alignment, and more.
+* DRC Workflow:
+  + Design input: Layout data in specific formats.
+  + Rule deck: Defines design rules and constraints.
+  + DRC tool: Analyzes design layout for rule violations.
+  + Error reporting: Generates reports highlighting violations.
+  + Iterative process: Design adjustments and rechecks.
+  + Final verification: Ensures compliance with manufacturing requirements.
+
 ## Power distribution network and routing:
 ### Lab steps to build power distribution network:
-### Lab steps from power straps to std cell power:
-### Basics of global and detail routing and configure TritonRoute:
-## TritonRoute features:
-### Triton features:
-### Triton route method to handle connectivity:
-### Routing topology algorithm final files list post-route:
+* `gen_pdn`
 
+![pdn](https://github.com/NishitaNJ/pes_pd/assets/142140741/b3b83483-5344-4886-8255-b0e7f044e33f)
+
+### Basics of global and detail routing and configure TritonRoute:
+* Global Routing:
+  + High-level routing.
+  + Connects blocks or modules.
+  + Establishes a rough path.
+  + Focuses on wire segments and connections.
+  + Balances signal delays and congestion.
+  + Doesn't specify exact wire paths.
+* Detail Routing:
+  + Low-level routing.
+  + Connects individual components within blocks.
+  + Specifies precise wire paths.
+  + Considers manufacturing constraints.
+  + Minimizes parasitic effects.
+  + Achieves the final layout.
+* Configuring TritonRoute:
+  + TritonRoute is an open-source router for ASIC and FPGA designs.
+  + Define design-specific parameters and constraints in the tool.
+  + Configure routing layers, widths, and spacing.
+  + Specify netlist and technology library files.
+  + Run TritonRoute to perform global and detail routing.
+  + Analyze and review routing results.
+  + Iterate and adjust configurations as needed for optimization.
+
+### Routing topology algorithm final files list post-route:
+**SPEF EXTRACTION**
+* After the completion of routing interconnect parasitics can be extracted to perform sign-off post-route STA analysis.
+* These are extracted into a SPEF file.
+* The SPEF extractor is not included in the OpenLANE as of now.
+* `cd ~/Desktop/work/tools/SPEFEXTRACTOR`
+* `python3 main.py <path to merged.lef in tmp> <path to def in routing>`
+* The SPEF File is generated where the def file is present.
 </details>
