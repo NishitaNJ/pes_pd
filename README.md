@@ -756,7 +756,7 @@
 * After modifying the config.tcl file, run the following commands on openLANE flow:
   + `./flow.tcl -interactive`
   + `package require openlane 0.9`
-  + `prep -design picorv32a -tag 02-07_07-56 -overwrite`
+  + `prep -design picorv32a -tag 18-09_06-12 -overwrite`
   + `set lefs [glob $::env(DESIGN_DIR)/src/*.lef]`
   + `add_lefs -src $lefs`
   + `run_synthesis`
@@ -797,6 +797,8 @@
 ![Screenshot from 2023-09-19 16-20-41](https://github.com/NishitaNJ/pes_pd/assets/142140741/e6f2c0bf-b436-451f-9cbd-aefce16146b9)
 
 ![Screenshot from 2023-09-19 16-24-35](https://github.com/NishitaNJ/pes_pd/assets/142140741/8065d88c-13ca-4017-94d4-8bc050a42a4a)
+
+![Screenshot from 2023-09-21 10-13-12](https://github.com/NishitaNJ/pes_pd/assets/142140741/12f97eb9-9b53-4073-89ff-b98f62768d17)
 
 * To view the alignment type: `expand`, in the tkcon window.
 
